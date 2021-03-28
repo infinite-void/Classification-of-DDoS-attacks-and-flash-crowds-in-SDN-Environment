@@ -255,16 +255,19 @@ class NetworkTopo( Topo ):
         for i in range(111, 121):
             self.addLink('h' + str(i), s12)
 
-def run():
-    c = RemoteController('c', '0.0.0.0', 6633)
-    net = Mininet(topo=NetworkTopo(), host=CPULimitedHost, controller=None)
-    net.addController(c)
-    net.start()
+        
 
-    CLI(net)
-    net.stop()
+# def run():
+#     c = RemoteController('c', '0.0.0.0', 6633)
+#     net = Mininet(topo=NetworkTopo(), host=CPULimitedHost, controller=None)
+#     net.addController(c)
+#     net.start()
+    
+#     CLI(net)
+    
+#     net.stop()
 
-# if the script is run directly (sudo custom/optical.py):
-if __name__ == '__main__':
-    setLogLevel('info')
-    run()
+# # if the script is run directly (sudo custom/optical.py):
+# if __name__ == '__main__':
+#     setLogLevel('info')
+#     run()
