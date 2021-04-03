@@ -6,8 +6,9 @@ from mininet.node import Node
 from mininet.log import setLogLevel, info
 from mininet.cli import CLI
 
-from mininet.node import RemoteController
+from mininet.node import RemoteController, OVSSwitch
 from mininet.node import CPULimitedHost
+from add_routes import add_routes
 
 class LinuxRouter( Node ):
 
@@ -137,9 +138,11 @@ class NetworkTopo( Topo ):
         self.addLink( s6, r2, intfName2 = 'r2-eth1', params2 = { 'ip' : '18.36.1.1/24' })
         self.addLink( s7, r2, intfName2 = 'r2-eth2', params2 = { 'ip' : '82.66.1.1/24' })
 
-        h50 = self.addHost( 'h50', ip = '45.24.1.10/24', defaultRoute = 'via 45.24.1.1' )
+        h50 = self.addHost( 'h50', mac = 'aa:bb:cc:dd:ee:01',ip = '45.24.1.10/24', defaultRoute = 'via 45.24.1.1' )
+        guard = self.addHost( 'guard', mac = 'aa:bb:cc:dd:ee:02',ip = '45.24.1.11/24', defaultRoute = 'via 45.24.1.1')
 
         self.addLink( h50, s5)
+        self.addLink( guard, s5)
 
         h51 = self.addHost( 'h51', ip = '18.36.1.11/24', defaultRoute = 'via 18.36.1.1' )
         h52 = self.addHost( 'h52', ip = '18.36.1.12/24', defaultRoute = 'via 18.36.1.1' )
@@ -255,19 +258,33 @@ class NetworkTopo( Topo ):
         for i in range(111, 121):
             self.addLink('h' + str(i), s12)
 
-        
+c0 = RemoteController( 'c0', ip = '127.0.0.1', port = 6653 )
+c1 = RemoteController( 'c1', ip = '127.0.0.1', port = 6633 )
 
-# def run():
-#     c = RemoteController('c', '0.0.0.0', 6633)
-#     net = Mininet(topo=NetworkTopo(), host=CPULimitedHost, controller=None)
-#     net.addController(c)
-#     net.start()
-    
-#     CLI(net)
-    
-#     net.stop()
+cmap = { 's0': c0, 's1': c0, 's2': c0, 's3': c0, 
+         's4': c0, 's5': c1, 's6': c0, 's7': c0, 
+         's8': c0, 's9': c0, 's10': c0, 
+         's11':  c0, 's12': c0 }
 
-# # if the script is run directly (sudo custom/optical.py):
-# if __name__ == '__main__':
-#     setLogLevel('info')
-#     run()
+class MultiSwitch( OVSSwitch ):
+    
+    def start( self, controllers ):
+        return OVSSwitch.start( self, [ cmap[ self.name ] ] )     
+
+def run():  
+    net = Mininet(topo = NetworkTopo(), host = CPULimitedHost, switch = MultiSwitch, build = False)
+    
+    for c in [c0, c1]:
+        net.addController(c)
+
+    net.build()
+    net.start()
+    add_routes(net)
+    CLI(net)
+
+    net.stop()
+
+# if the script is run directly (sudo custom/optical.py):
+if __name__ == '__main__':
+    setLogLevel('info')
+    run()

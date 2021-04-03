@@ -22,11 +22,11 @@ from ryu.lib.packet import packet
 from ryu.lib.packet import ethernet
 
 
-class ExampleSwitch13(app_manager.RyuApp):
+class GuardSwitch(app_manager.RyuApp):
     OFP_VERSIONS = [ofproto_v1_3.OFP_VERSION]
 
     def __init__(self, *args, **kwargs):
-        super(ExampleSwitch13, self).__init__(*args, **kwargs)
+        super(GuardSwitch, self).__init__(*args, **kwargs)
         # initialize mac address table.
         self.mac_to_port = {}
 
@@ -84,10 +84,16 @@ class ExampleSwitch13(app_manager.RyuApp):
             out_port = self.mac_to_port[dpid][dst]
         else:
             out_port = ofproto.OFPP_FLOOD
-
+        
         # construct action list.
-        actions = [parser.OFPActionOutput(out_port)]
-
+        if(in_port == 1 and out_port == 2):
+            actions = [parser.OFPActionOutput(2), parser.OFPActionOutput(3)]
+        # elif(in_port == 3):
+        #     actions = []
+        else:
+            actions = [parser.OFPActionOutput(out_port)]
+        
+        
         # install a flow to avoid packet_in next time.
         if out_port != ofproto.OFPP_FLOOD:
             match = parser.OFPMatch(in_port=in_port, eth_dst=dst)
