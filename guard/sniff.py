@@ -1,24 +1,45 @@
 import scapy
 from scapy.all import *
+from math import log2
+import time
 
-# a = sniff(iface="guard-eth0", count=5)
+def shannon(boe):
+    total = sum(boe.values()) 
+    return sum(freq / total * log2(total / freq) for freq in boe.values())
 
-# for pkt in a:
-#         print(pkt.summary())    
-#         print(pkt.getlayer(IP).src)
+def getTraffic(x):
+        tc = dict()
+        for i, j in x.items():
+                subnet = '.'.join(i.split('.')[:2]) + '.0.0'
+                if(tc.get(subnet)):
+                        tc[subnet] += 1
+                else:
+                        tc[subnet] = 1
+        return tc
 
-count = 0
+pkt_count = dict()
+
 def pktcount(x):
-        global count
-        count += 1
-        print(x.summary())
+        global pkt_count
+        srcip = x[IP].src
+        if(pkt_count.get(srcip)):
+                pkt_count[srcip] += 1
+        else:
+                pkt_count[srcip] = 1
         
 
-t = AsyncSniffer(iface = "guard-eth0", prn=pktcount, filter = 'ip')
+t = AsyncSniffer(iface = "guard-eth0", prn = pktcount, filter = 'ip')
 
 t.start()
 
 time.sleep(30)
 
 t.stop()
-print(count)
+
+tc = getTraffic(pkt_count)
+
+print(pkt_count)
+
+print('Source Entropy : ', shannon(pkt_count))
+print(tc)
+print('TC Entropy : ', shannon(tc))

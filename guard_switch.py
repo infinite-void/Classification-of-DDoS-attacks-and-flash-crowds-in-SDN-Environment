@@ -88,8 +88,8 @@ class GuardSwitch(app_manager.RyuApp):
         # construct action list.
         if(in_port == 1 and out_port == 2):
             actions = [parser.OFPActionOutput(2), parser.OFPActionOutput(3)]
-        # elif(in_port == 3):
-        #     actions = []
+        elif(in_port == 3):
+            actions = []
         else:
             actions = [parser.OFPActionOutput(out_port)]
         
