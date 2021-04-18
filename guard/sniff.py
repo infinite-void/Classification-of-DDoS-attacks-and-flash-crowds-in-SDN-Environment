@@ -30,7 +30,9 @@ def pktcount(x):
                 pkt_count[srcip] += 1
         else:
                 pkt_count[srcip] = 1
-        
+sfile = open('sample.txt', 'w')
+sfile.write('working...')
+sfile.close()
 while True:
         pkt_count.clear()
         t = AsyncSniffer(iface = "guard-eth0", prn = pktcount, filter = 'ip')
