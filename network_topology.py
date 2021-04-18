@@ -258,9 +258,10 @@ class NetworkTopo( Topo ):
         for i in range(111, 121):
             self.addLink('h' + str(i), s12)
 
-c0 = RemoteController( 'c0', ip = '127.0.0.1', port = 6653 )
-c1 = RemoteController( 'c1', ip = '127.0.0.1', port = 6633 )
-
+c0 = RemoteController( 'c0', ip = '192.168.43.129', port = 6653 )
+print(c0)
+c1 = RemoteController( 'c1', ip = '192.168.43.148', port = 6633 )
+print(c1)
 cmap = { 's0': c0, 's1': c0, 's2': c0, 's3': c0, 
          's4': c0, 's5': c1, 's6': c0, 's7': c0, 
          's8': c0, 's9': c0, 's10': c0, 

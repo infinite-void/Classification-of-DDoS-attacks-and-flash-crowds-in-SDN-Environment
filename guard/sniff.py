@@ -33,7 +33,7 @@ def pktcount(x):
         
 while True:
         pkt_count.clear()
-        t = AsyncSniffer(iface = "h50-eth0", prn = pktcount, filter = 'ip')
+        t = AsyncSniffer(iface = "guard-eth0", prn = pktcount, filter = 'ip')
         t.start()
         time.sleep(30)
         t.stop()

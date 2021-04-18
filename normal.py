@@ -12,8 +12,8 @@ hostids = list()
 hostlist = list()
 atlist = list()
 
-c0 = RemoteController( 'c0', ip = '127.0.0.1', port = 6653 )
-c1 = RemoteController( 'c1', ip = '127.0.0.1', port = 6633 )
+c0 = RemoteController( 'c0', ip = '192.168.43.129', port = 6653 )
+c1 = RemoteController( 'c1', ip = '192.168.43.148', port = 6633 )
 
 cmap = { 's0': c0, 's1': c0, 's2': c0, 's3': c0, 
          's4': c0, 's5': c1, 's6': c0, 's7': c0, 
@@ -35,7 +35,7 @@ net.build()
 net.start()
 add_routes(net)
 def getXterm(): 
-        guard = net.hosts[51]
+        guard = net.hosts[0]
         guard.cmd('xterm')
 
 def normalTraffic(host):
