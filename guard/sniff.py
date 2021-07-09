@@ -2,6 +2,17 @@ import scapy
 from scapy.all import *
 from math import log2
 import time
+import numpy as np
+import pandas as pd
+
+dataset = pd.read_csv('Simulated_Traffic_Data.csv')
+X = dataset.iloc[:,[0,2]].values
+y = dataset.iloc[:,2].values
+
+from sklearn.linear_model import LogisticRegression
+classifier = LogisticRegression(random_state = 0)
+classifier.fit(X_train, y_train)
+
 
 def shannon(boe):
     total = sum(boe.values()) 
@@ -43,6 +54,10 @@ while True:
         tc = getTraffic(pkt_count)
 
         print(pkt_count)
+        srcip = shannon(pkt_count)
         print('Source Entropy : ', shannon(pkt_count))
         print(tc)
         print('TC Entropy : ', shannon(tc))
+        tcip = shannon(tc)
+        traffic_type = classifier.predict(np.array([srcip, tcip])
+
