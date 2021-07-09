@@ -2,15 +2,15 @@
 
 This repo contains the code for the project done and submitted as part of course _**CS6611 - Creative & Innovative Project**_ and partial requirement for the degree of _**Bachelors of Engineering(Computer Science & Engineering)**._
 
-_**This project deals with the real-time incoming traffic classification into DDoS(Distributed Denial of Services) Attacks & Flash Crowds based on Source and Traffic Cluster Entropy Score in Software-Defined Networking(SDN) environment.
-**_
+_This project deals with the real-time incoming traffic classification into DDoS(Distributed Denial of Services) Attacks & Flash Crowds based on Source and Traffic Cluster Entropy Score in Software-Defined Networking(SDN) environment.
+_
 
-**Salient Features: **
+**Salient Features:**
 1. Real-Time Classification of incoming traffic.
 2. Uses Source and Traffic Cluster Entropy.
 3. Focus on reduncing the load on SDN Controller.
 
-**Block Diagram**
+**Block Diagram**<br>
 ![image](https://user-images.githubusercontent.com/43112029/125096273-9ddac600-e0f2-11eb-8136-5d272a7008f0.png)
 
 **Tech/Tools used:**
