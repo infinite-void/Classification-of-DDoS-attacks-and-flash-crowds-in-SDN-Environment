@@ -10,7 +10,8 @@ _This project deals with the real-time incoming traffic classification into DDoS
 3. Focus on reduncing the load on SDN Controller.
 
 **Block Diagram**<br>
-![image](https://user-images.githubusercontent.com/43112029/125096273-9ddac600-e0f2-11eb-8136-5d272a7008f0.png)
+![unnamed](https://user-images.githubusercontent.com/43112029/125097449-c3b49a80-e0f3-11eb-929d-0f3d705e5056.jpg)
+
 
 **Tech/Tools used:**
 1. <a href="http://mininet.org">Mininet SDN Virtual Test Bed</a>
