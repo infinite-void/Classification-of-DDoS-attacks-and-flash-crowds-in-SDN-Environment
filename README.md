@@ -10,7 +10,7 @@ _This project deals with the real-time incoming traffic classification into DDoS
 3. Focus on reduncing the load on SDN Controller.
 
 **Block Diagram**<br>
-![unnamed](https://user-images.githubusercontent.com/43112029/125097449-c3b49a80-e0f3-11eb-929d-0f3d705e5056.jpg)
+![cip_block](https://user-images.githubusercontent.com/43112029/125097877-2c9c1280-e0f4-11eb-8cbf-b4de8048f52b.jpg)
 
 
 **Tech/Tools used:**
