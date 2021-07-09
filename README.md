@@ -14,5 +14,5 @@ _
 ![image](https://user-images.githubusercontent.com/43112029/125096273-9ddac600-e0f2-11eb-8136-5d272a7008f0.png)
 
 **Tech/Tools used:**
-1. <a href="mininet.org">Mininet SDN Virtual Test Bed</a>
-2. <a href="ryu-sdn.org">RYU SDN Controller</a>
+1. <a href="http://mininet.org">Mininet SDN Virtual Test Bed</a>
+2. <a href="http://ryu-sdn.org">RYU SDN Controller</a>
